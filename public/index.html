@@ -14,8 +14,8 @@
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
   <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -25,31 +25,33 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-  <title>pwa-theme-woocommerce</title>
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css" />
-  <script type="text/javascript">
-    window.appticles = {
-      config: {
-        SHOP_NAME: 'MY SHOP',
-        API_CATEGORIES_URL: 'https://pwathemes.com/demo-api/wp-json/pwacommercepro/categories/',
-        API_PRODUCTS_URL: 'https://pwathemes.com/demo-api/wp-json/pwacommercepro/products/',
-        API_PRODUCT_URL: 'https://pwathemes.com/demo-api/wp-json/pwacommercepro/product/',
-        API_REVIEWS_URL: 'https://pwathemes.com/demo-api/wp-json/pwacommercepro/reviews/',
-        API_VARIATIONS_URL: 'https://pwathemes.com/demo-api/wp-json/pwacommercepro/product-variations/',
-        API_CHECKOUT_URL: 'https://pwathemes.com/demo-api/wp-json/pwacommercepro/proceed-checkout',
-        CHECKOUT_URL: 'https://pwathemes.com/demo-api/checkout/',
-        CURRENCY: '$',
-        OFFLINE: false,
+    <title>core-pwa-theme</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css" />
+    <script type="text/javascript">
+      window.appticles = {
+        config: {
+          API_BASE_URL: 'http://localhost:3000/app-mobile/',
+          // API_BASE_URL: 'http://www.produto.core.dcg.com.br/app-mobile/',
+          SHOP_NAME: 'Meu tema PWA',
+          API_CATEGORIES_URL: 'http://www.produto.core.dcg.com.br/app-mobile/',
+          API_PRODUCTS_URL: 'https://pwathemes.com/demo-api/wp-json/pwacommercepro/products/',
+          API_PRODUCT_URL: 'https://pwathemes.com/demo-api/wp-json/pwacommercepro/product/',
+          API_REVIEWS_URL: 'https://pwathemes.com/demo-api/wp-json/pwacommercepro/reviews/',
+          API_VARIATIONS_URL: 'https://pwathemes.com/demo-api/wp-json/pwacommercepro/product-variations/',
+          API_CHECKOUT_URL: 'https://pwathemes.com/demo-api/wp-json/pwacommercepro/proceed-checkout',
+          CHECKOUT_URL: 'https://pwathemes.com/demo-api/checkout/',
+          CURRENCY: 'R$',
+          OFFLINE: false,
+        }
       }
-    }
-  </script>
-</head>
+    </script>
+  </head>
 
-<body>
-  <noscript>
-    You need to enable JavaScript to run this app.
-  </noscript>
-  <div id="root" style="height:100%"></div>
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="root" style="height:100%"></div>
   <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -60,6 +62,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-</body>
+  </body>
 
-</html>
+  </html>

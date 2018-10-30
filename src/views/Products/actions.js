@@ -35,3 +35,30 @@ export const fetchProducts = (params = {}) => (dispatch) => {
       dispatch(receiveProducts([]));
     });
 };
+
+
+export const fetchProductList = (params = {}) => (dispatch) => {
+  dispatch(requestProducts());
+
+  let url = `/listas/`;
+
+  if(params.listAlias) {
+    url += params.listAlias;
+  }
+
+  if(params.paginator){
+    url =
+      url +
+      '?' +
+      Object.keys(params)
+        .map(k => k + '=' + encodeURIComponent(params[k]))
+        .join('&');
+  }
+
+  return fetch(url)
+    .then(response => response.json())
+    .then(json => dispatch(receiveProducts(json)))
+    .catch(() => {
+      dispatch(receiveProducts([]));
+    });
+};

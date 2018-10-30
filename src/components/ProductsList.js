@@ -8,12 +8,12 @@ class ProductsList extends Component {
   render() {
     const list = this.props.products.map(element => (
       <ProductCard
-        key={element.id}
-        id={element.id}
-        src={element.images[0].src}
-        name={element.name}
-        price={element.price}
-        categories={element.categories}
+        key={element.ProductID}
+        id={element.ProductID}
+        src={element.MediaSmall}
+        name={element.Name}
+        price={element.RetailPrice}
+        categories={element.categories || []}
       />
     ));
 

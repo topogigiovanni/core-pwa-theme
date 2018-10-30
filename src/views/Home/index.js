@@ -6,7 +6,7 @@ import { Loader, Container } from 'semantic-ui-react';
 import _ from 'lodash';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-import { fetchProducts } from '../Products/actions';
+import { fetchProductList } from '../Products/actions';
 import { getProductsFetching, getProducts, productPropType, getProductsHasMore } from '../Products/reducer';
 import ProductsList from '../../components/ProductsList';
 import { closeSearch } from '../../components/NavBar/actions';
@@ -30,10 +30,11 @@ class Home extends Component {
    * Filter and return featured products (if there are any)
    */
   getFilteredProducts() {
-    const items = this.props.products.filter(product => product.featured);
-    if (items.length > 0) {
-      return items;
-    }
+    // const items = this.props.products.filter(product => product.featured);
+    // if (items.length > 0) {
+    //   return items;
+    // }
+    // debugger;
 
     return this.props.products;
   }
@@ -50,12 +51,12 @@ class Home extends Component {
 
   readProducts(page) {
     const { dispatch } = this.props;
-    dispatch(fetchProducts({
-      page,
-      featured: 1,
-      order: 'asc',
-      orderby: 'title',
-      per_page: 20,
+    dispatch(fetchProductList({
+      Page: page,
+      listAlias: 'lista-produtos-home-vitrine-01', // alias da Lista de Produtos
+      Order: 'asc',
+      Orderby: 'title',
+      PerPage: 20,
     }));
   }
 
@@ -110,7 +111,7 @@ const mapStateToProps = state => ({
 });
 
 function mapDispatchToProps(dispatch) {
-  return Object.assign({ dispatch }, bindActionCreators({ fetchProducts, closeSearch }, dispatch));
+  return Object.assign({ dispatch }, bindActionCreators({ fetchProductList, closeSearch }, dispatch));
 }
 
 export default connect(
