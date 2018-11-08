@@ -41,11 +41,17 @@ class ProductDetails extends Component {
   }
 
   getCategories() {
-    return this.props.product.categories.map(category => category.name).join(', ');
+    // return this.props.product.categories.map(category => category.name).join(', ');
+    return '';
   }
 
   getImageGallery() {
-    return this.props.product.images.map(image => ({ original: image.src }));
+    if(!this.props.product.Medias) {
+      return [];
+    }
+
+    const medias = this.props.product.Medias.filter(media => media.MediaSizeType === 'Medium') || [];
+    return medias.map(media => ({ original: media.MediaPath }));
   }
 
   /**

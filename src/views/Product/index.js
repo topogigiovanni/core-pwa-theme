@@ -5,7 +5,7 @@ import { Loader } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import { fetchProducts } from '../Products/actions';
+import { getProduct } from '../Products/actions';
 import { getProducts, getProductsFetching, productPropType } from '../Products/reducer';
 import ProductDetails from './ProductDetails';
 import { closeSearch } from '../../components/NavBar/actions';
@@ -29,7 +29,7 @@ class Product extends Component {
 
   readProduct() {
     const { dispatch } = this.props;
-    dispatch(fetchProducts({ id: this.props.match.params.productId }));
+    dispatch(getProduct(this.props.match.params.productId));
   }
 
   render() {
@@ -41,9 +41,12 @@ class Product extends Component {
       );
     }
 
-    const product = this.props.products.find(
-      obj => obj.id === Number(this.props.match.params.productId),
-    );
+    // debugger;
+    // const product = this.props.products.find(
+    //   obj => obj.ProductID === Number(this.props.match.params.productId),
+    // );
+
+    const product = this.props.detail;
 
     if (_.isNil(product)) {
       return <p>Product does not exist</p>;
@@ -70,10 +73,11 @@ const mapStateToProps = state => ({
   loading: getProductsFetching(state.products),
   products: getProducts(state.products),
   searchVisible: isSearchVisible(state.navbar),
+  detail: {...state.detail}
 });
 
 function mapDispatchToProps(dispatch) {
-  return Object.assign({ dispatch }, bindActionCreators({ fetchProducts, closeSearch }, dispatch));
+  return Object.assign({ dispatch }, bindActionCreators({ getProduct, closeSearch }, dispatch));
 }
 
 export default connect(

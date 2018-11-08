@@ -1,7 +1,12 @@
 import { combineReducers } from 'redux';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { REQUEST_PRODUCTS, RECEIVE_PRODUCTS } from './actions';
+import {
+  REQUEST_PRODUCTS,
+  RECEIVE_PRODUCTS,
+  REQUEST_PRODUCT,
+  RECEIVE_PRODUCT
+} from './actions';
 
 // export const productPropType = PropTypes.shape({
 //   id: PropTypes.number.isRequired,
@@ -50,6 +55,23 @@ export const productPropType = PropTypes.shape({
     })
   )
 });
+
+const detail = (state = {}, action) => {
+  switch (action.type) {
+    case REQUEST_PRODUCT:
+      return state;
+    case RECEIVE_PRODUCT:
+      // debugger;
+      const product = _.get(action, 'product', {});
+      //return _.unionBy([products], state, 'id');
+      return {
+        ...product
+      };
+    default:
+      return state;
+  }
+};
+
 const items = (state = [], action) => {
   switch (action.type) {
     case REQUEST_PRODUCTS:
@@ -115,4 +137,5 @@ export default combineReducers({
   items,
   isFetching,
   hasMore,
+  detail
 });
