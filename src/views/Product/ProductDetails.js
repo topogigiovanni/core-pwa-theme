@@ -41,8 +41,8 @@ class ProductDetails extends Component {
   }
 
   getCategories() {
-    // return this.props.product.categories.map(category => category.name).join(', ');
-    return '';
+    const categories = _.get(this.props.product, 'ExtendedProps.categories', []);
+    return categories.map(category => category).join(', ');
   }
 
   getImageGallery() {
@@ -97,7 +97,11 @@ class ProductDetails extends Component {
       ProductDetails.isAnyCached(this.getImageGallery())[0] === false
         ? ProductDetails.isAnyCached(this.getImageGallery())[0]
         : true;
-
+    const extended = _.get(this.props.product, 'ExtendedProps', {});
+    const categories = extended.categories || [];
+    const permalink = extended.permalink || '';
+    const variations = _.get(this.props.product, 'variations', []);
+    const descriptions = _.get(this.props.product, 'Descriptions', []);
     return (
       <div>
         <Header textAlign="center" className="break-words">
@@ -120,7 +124,7 @@ class ProductDetails extends Component {
               />
             </Card.Content>
           ) : null}
-          {this.props.product.categories.length === 0 ? null : (
+          {categories.length === 0 ? null : (
             <Card.Content>{this.getCategories()}</Card.Content>
           )}
           <Card.Content>{this.props.product.in_stock ? 'In Stock' : 'Out of Stock'}</Card.Content>
@@ -128,11 +132,11 @@ class ProductDetails extends Component {
             (<Card.Content>
               <div dangerouslySetInnerHTML={{ __html: config.CURRENCY + this.props.product.price }} />
             </Card.Content>) : null}
-          {this.props.product.variations.length === 0 ? null : (
+          {variations.length === 0 ? null : (
             <Variations
               sendSelections={this.receiveSelections}
-              productId={this.props.product.id}
-              variationIds={this.props.product.variations}
+              productId={this.props.product.ProductID}
+              variationIds={variations}
             />
           )}
           {this.props.product.backorders_allowed || this.props.product.in_stock ? (
@@ -141,20 +145,20 @@ class ProductDetails extends Component {
             </Button>
           ) : null}
         </Card>
-        {this.props.product.description.length === 0 ? null : (
+        {descriptions.length === 0 ? null : (
           <Card centered>
             <Card.Content>
               <Card.Header as={Header} size="tiny">
                 Description
               </Card.Header>
               <Card.Description>
-                <div dangerouslySetInnerHTML={{ __html: this.props.product.description }} />
+                <div dangerouslySetInnerHTML={{ __html: descriptions[0].Value }} />
               </Card.Description>
             </Card.Content>
           </Card>
         )}
-        <Reviews productId={this.props.product.id} />
-        <SocialBox permalink={this.props.product.permalink} />
+        <Reviews productId={this.props.product.ProductID} />
+        <SocialBox permalink={permalink} />
       </div>
     );
   }

@@ -53,7 +53,10 @@ export const productPropType = PropTypes.shape({
       MaximumQtyAllowed: PropTypes.number,
       MinimumQtyAllowed: PropTypes.number
     })
-  )
+  ),
+  ExtendedProps: PropTypes.shape({
+    categories: PropTypes.array
+  })
 });
 
 const detail = (state = {}, action) => {
