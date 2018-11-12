@@ -3,14 +3,14 @@ PWA E-commerce Theme
 [![Bootstrapped With](https://img.shields.io/badge/bootstrapped%20with-create%20react%20app-blue.svg)](https://pwacommerce.com/downloads/progressive-web-app-for-woocommerce/) [![Code Style](https://img.shields.io/badge/code%20style-airbnb-brightgreen.svg)](https://github.com/airbnb/javascript)
 
 
-Turn your [Core](https://plataformacore.com.br/) site into a Progressive Web App!
+Turn your [CORE](https://plataformacore.com.br/) site into a Progressive Web App!
 
 DEMO: [https://pwa-woo.wpmobilepack.com](https://pwa-woo.wpmobilepack.com)
 
 
  &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp; ![demo](http://d3oqwjghculspf.cloudfront.net/github/pwa-theme-woocommerce/rLAB49Z.gif) &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; ![demo](http://d3oqwjghculspf.cloudfront.net/github/pwa-theme-woocommerce/GdyeKjo.gif) &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; ![demo](http://d3oqwjghculspf.cloudfront.net/github/pwa-theme-woocommerce/3AUek71.gif) &nbsp; &nbsp;  &nbsp; &nbsp;
 
-The PWA is built on top of the [Core REST API](http://docs.plataformacore.com.br/docs/como-criar-um-app-do-core).
+The PWA is built on top of the [CORE REST API](http://docs.plataformacore.com.br/docs/como-criar-um-app-do-core).
 
 The **tech stack** we used for building this Progressive Web App includes:
 
