@@ -11,10 +11,10 @@ class VariationsDropdown extends Component {
     this.remakeValues = this.remakeValues.bind(this);
 
     // Get all option names so that they can be saved to the state
-    const optionNames = this.props.variations[0].attributes.map(attribute => attribute.name);
+    const optionNames = this.props.variations[0].SKUOptions.map(attribute => attribute.Name);
 
     // Get all attribute combinations so that they can be saved to the state
-    const attributes = this.props.variations.map(variation => variation.attributes);
+    const attributes = this.props.variations.map(variation => variation.SKUOptions);
 
     const options = {};
 
@@ -34,9 +34,9 @@ class VariationsDropdown extends Component {
   getOptionValues(optionName) {
     const values = _.uniq(
       this.props.variations.map((variation) => {
-        const element = variation.attributes.find(attribute => attribute.name === optionName);
+        const element = variation.SKUOptions.find(attribute => attribute.Name === optionName);
 
-        return element.option;
+        return element.Title;
       }),
     );
     return values;
@@ -45,14 +45,17 @@ class VariationsDropdown extends Component {
   // function that triggers when an option value is selected and  changes the available values for the rest of the options
   remakeValues(data) {
     // get all the attribute combinations that have the selected value
-    const filteredAttributes = _.filter(this.state.attributes, attribute => !_.isNil(_.find(attribute, ['option', data.value])));
+    const filteredAttributes = _.filter(this.state.attributes, attribute => !_.isNil(_.find(attribute, ['Title', data.value])));
+    console.log('filteredAttributes', filteredAttributes);
+
+    // debugger;
 
     const options = this.state.options;
 
     // buid new options array with different values based on the selected one
-    this.state.optionNames.forEach((optionName) => {
-      if (optionName !== data.placeholder) {
-        options[optionName] = filteredAttributes.map(attribute => _.find(attribute, ['name', optionName]).option);
+    this.state.optionNames.forEach((optionName, i) => {
+      if (optionName !== data.placeholder && i > 0) {
+        options[optionName] = filteredAttributes.map(attribute => _.find(attribute, ['Name', optionName]).Title);
       }
     });
 

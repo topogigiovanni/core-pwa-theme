@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Loader, Card } from 'semantic-ui-react';
 import _ from 'lodash';
 import { fetchVariations } from './actions';
 import { getVariationsFetching, getVariations, variationPropType } from './reducer';
@@ -20,11 +19,11 @@ class Variations extends Component {
   }
 
   componentDidMount() {
-    this.readVariations(this.props.productId);
+    //this.readVariations(this.props.productId);
   }
 
   getVariationsByProduct() {
-    return this.props.variations.filter(variation => !_.isNil(_.find(this.props.variationIds, element => element === variation.id)));
+    return this.props.variations.filter(variation => !_.isNil(_.find(this.props.variationIds, element => element === variation.ProductID)));
   }
 
   getVariationIdBySelections() {
@@ -34,19 +33,19 @@ class Variations extends Component {
     _.forEach(this.props.variations, (variation) => {
       // since the variations array can contain variations from other products we also need
       // to make sure the variation belongs to the current product
-      if (this.props.variationIds.includes(variation.id)) {
-        attributesArray[variation.id] = variation.attributes;
+      if (this.props.variationIds.includes(variation.ProductID)) {
+        attributesArray[variation.ProductID] = variation.SKUOptions;
       }
     });
 
     // create an array that will contain the filtered values and initialize it by filtering based on the first option
     const selections = Object.values(this.state.selections);
-    let filteredAttributes = _.filter(attributesArray, attributeArray => !_.isNil(_.find(attributeArray, ['option', selections[0]])));
+    let filteredAttributes = _.filter(attributesArray, attributeArray => !_.isNil(_.find(attributeArray, ['Title', selections[0]])));
 
     // filter the array for each of the selections untill we arrive at an element that has all the selection values
     _.forEach(this.state.selections, (selection, index) => {
       if (index !== 0) {
-        filteredAttributes = filteredAttributes.filter(filteredAttribute => !_.isNil(_.find(filteredAttribute, ['option', selection])));
+        filteredAttributes = filteredAttributes.filter(filteredAttribute => !_.isNil(_.find(filteredAttribute, ['Title', selection])));
       }
     });
 
@@ -62,7 +61,7 @@ class Variations extends Component {
       selections,
     });
 
-    if (_.size(this.state.selections) === this.props.variations[0].attributes.length) {
+    if (_.size(this.state.selections) === this.props.variations[0].SKUOptions.length) {
       this.props.sendSelections(this.state.selections, this.getVariationIdBySelections());
     }
   }
@@ -75,21 +74,16 @@ class Variations extends Component {
   render() {
     const variationsByProduct = this.getVariationsByProduct();
 
-    if (this.props.loading === 0 && !_.isEmpty(this.props.variations) && !_.isEmpty(variationsByProduct)) {
+    if (!_.isEmpty(this.props.variations) && !_.isEmpty(variationsByProduct)) {
       return <VariationsDropdown handleSelect={this.handleSelect} variations={variationsByProduct} />;
     }
 
-    return (
-      <Card.Content>
-        <Loader inline="centered" active />
-      </Card.Content>
-    );
+    return null;
   }
 }
 
 Variations.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  loading: PropTypes.number.isRequired,
   variations: PropTypes.arrayOf(variationPropType).isRequired,
   variationIds: PropTypes.array.isRequired,
   productId: PropTypes.number.isRequired,
@@ -97,8 +91,7 @@ Variations.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  loading: getVariationsFetching(state.variations),
-  variations: getVariations(state.variations),
+  //variations: getVariations(state.variations),
 });
 
 function mapDispatchToProps(dispatch) {

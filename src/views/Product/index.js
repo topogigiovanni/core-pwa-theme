@@ -73,7 +73,7 @@ const mapStateToProps = state => ({
   loading: getProductsFetching(state.products),
   products: getProducts(state.products),
   searchVisible: isSearchVisible(state.navbar),
-  detail: {...state.detail}
+  detail: {...state.products.detail}
 });
 
 function mapDispatchToProps(dispatch) {

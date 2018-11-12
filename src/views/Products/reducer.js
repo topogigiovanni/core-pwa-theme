@@ -56,7 +56,8 @@ export const productPropType = PropTypes.shape({
   ),
   ExtendedProps: PropTypes.shape({
     categories: PropTypes.array
-  })
+  }),
+  Medias: PropTypes.array
 });
 
 const detail = (state = {}, action) => {
@@ -64,9 +65,7 @@ const detail = (state = {}, action) => {
     case REQUEST_PRODUCT:
       return state;
     case RECEIVE_PRODUCT:
-      // debugger;
       const product = _.get(action, 'product', {});
-      //return _.unionBy([products], state, 'id');
       return {
         ...product
       };
@@ -80,9 +79,7 @@ const items = (state = [], action) => {
     case REQUEST_PRODUCTS:
       return state;
     case RECEIVE_PRODUCTS:
-      // debugger;
       const products = _.get(action, 'products.base.Products', []);
-      //return _.unionBy([products], state, 'id');
       return [
         ...state,
         ...products
@@ -97,7 +94,6 @@ const hasMore = (state = false, action) => {
     case REQUEST_PRODUCTS:
       return true;
     case RECEIVE_PRODUCTS:
-      // 20 is the default per_page number used for paginating products
       return _.get(action, 'products.base.HasNextPage', false);
     default:
       return state;
@@ -125,11 +121,7 @@ const isFetching = (state = 0, action) => {
 //     !_.isNil(_.find(product.categories, { id: Number(category) })));
 // };
 
-export const getProducts = (state, category = null) => {
-  if (category === null) {
-    return state.items;
-  }
-
+export const getProducts = state => {
   return state.items;
 };
 
